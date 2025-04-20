@@ -1,9 +1,6 @@
-export const heatmapData = [
-  { date: '2025-04-01', minutes: 30 },
-  { date: '2025-04-02', minutes: 0 },
-  { date: '2025-04-03', minutes: 60 },
-  { date: '2025-04-04', minutes: 45 },
-  { date: '2025-04-05', minutes: 20 },
-  { date: '2025-04-06', minutes: 0 },
-  { date: '2025-04-07', minutes: 75 },
-];
+export const heatmapData = Array.from({ length: 365 }, (_, i) => {
+  const date = new Date(2025, 0, 1 + i); // 从 1 月 1 日开始
+  const isoDate = date.toISOString().split('T')[0];
+  const minutes = Math.random() < 0.3 ? 0 : Math.floor(Math.random() * 90); // 约 30% 为空闲日
+  return { date: isoDate, minutes };
+});
