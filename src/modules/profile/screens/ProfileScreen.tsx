@@ -2,10 +2,9 @@ import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import BackgroundBanner from '../components/BackgroundBanner';
 import AvatarCard from '../components/AvatarCard';
-import DurationChart from '../components/DurationChart';
-import RecommendedUserList from '../components/RecommendedUserList';
 import EditAndSearchButtons from '../components/EditAndSearchButtons';
-import DurationHeatmap from '../components/DurationHeatmap';
+import RecommendedUserList from '../components/RecommendedUserList';
+import DurationChart from '../components/DurationChart';
 
 export default function ProfileScreen() {
   return (
@@ -14,7 +13,6 @@ export default function ProfileScreen() {
       <AvatarCard />
       <EditAndSearchButtons />
       <DurationChart />
-      <DurationHeatmap />
       <RecommendedUserList />
     </ScrollView>
   );

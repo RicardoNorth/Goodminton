@@ -5,11 +5,23 @@ import PostScreen from '../modules/post/screens/PostScreen';
 import MatchScreen from '../modules/match/screens/MatchScreen';
 import ProfileScreen from '../modules/profile/screens/ProfileScreen';
 import AnimatedTabBarButton from './components/AnimatedTabBarButton';
-
+import { Keyboard } from 'react-native';
+import { useEffect, useState } from 'react';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
+  const [isTabVisible, setIsTabVisible] = useState(true);
+
+  useEffect(() => {
+    const showSub = Keyboard.addListener('keyboardDidShow', () => setIsTabVisible(false));
+    const hideSub = Keyboard.addListener('keyboardDidHide', () => setIsTabVisible(true));
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, []);
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -18,14 +30,14 @@ export default function BottomTabNavigator() {
           tabBarActiveTintColor: '#000',
           tabBarLabelStyle: { fontSize: 12, marginBottom: 2 },
           tabBarItemStyle: { paddingTop: 6 },
+          tabBarStyle: isTabVisible ? undefined : { display: 'none' }, // 👈 关键
         }}
       >
         <Tab.Screen
           name="首页"
           component={PostScreen}
           options={{
-            tabBarIcon: ({ color, size }) => 
-              <Home color={color} size={size} />,
+            tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
             tabBarButton: (props) => <AnimatedTabBarButton {...props} />,
           }}
         />
